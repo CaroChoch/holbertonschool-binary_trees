@@ -1,7 +1,5 @@
 #include "binary_trees.h"
 
-#include <math.h>
-
 /**
  * binary_tree_height - get the height of the binary tree
  * @tree: header of the current value
