@@ -18,21 +18,6 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	return (0);
 }
 
-/**
- * binary_tree_nodes -  function that counts the nodes with at least 1 child
- * in a binary tree.
- * @tree: pointer to the root node of the tree to count the number of nodes.
- * Return: number of nodes with at least one child, and 0 if the tree is NULL.
-*/
-
-size_t binary_tree_nodes(const binary_tree_t *tree)
-{
-	if (tree == NULL || (tree->left == NULL && tree->right == NULL))
-		return (0);
-
-	return (binary_tree_nodes(tree->left)
-		+ binary_tree_nodes(tree->right) + 1);
-}
 
 /**
  * _pow - returns the power of 2 size_t numbers.
@@ -81,11 +66,14 @@ size_t binary_tree_leaves(const binary_tree_t *tree)
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int h = binary_tree_height(tree) - 1;
-	int total_number_of_nodes = binary_tree_nodes(tree);
+	int height = binary_tree_height(tree);
+	int total_number_of_leaves = binary_tree_leaves(tree);
 
 	if (tree == NULL)
 		return (0);
 
-	return (_pow(2, h + 1) - 1 == total_number_of_nodes);
+	if (total_number_of_leaves == _pow(2, height))
+		return (1);
+	else
+		return (0);
 }
