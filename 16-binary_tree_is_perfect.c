@@ -45,11 +45,13 @@ size_t binary_tree_nodes(const binary_tree_t *tree)
 
 int _pow(int x, int y)
 {
+	if (y < 0)
+		return (-1);
 	if (y == 0)
 		return (1);
-
-	return (_pow(x, y - 1) * x);
+	return (x * _pow(x, y - 1));
 }
+
 
 /**
  * binary_tree_is_perfect - function that checks if a binary tree is full.
@@ -64,7 +66,7 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	int total_number_of_nodes = binary_tree_nodes(tree);
 
 	if (tree == NULL)
-			return (0);
+		return (0);
 
 	return (_pow(2, h + 1) - 1 == total_number_of_nodes);
 }
