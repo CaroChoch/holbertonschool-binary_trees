@@ -18,16 +18,24 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	return (0);
 }
 
+/**
+ * CurrentLevel - function that gives the current level of the binary tree.
+ * @tree: pointer to the root node of the tree to traverse.
+ * @level: level of the node in the tree.
+ * @func: pointer to a function to call for each node. The value in the node
+ * must be passed as a parameter to this function.
+*/
 void CurrentLevel(const binary_tree_t *tree, int level, void (*func)(int))
 {
-	if (tree == NULL && func == NULL)
-		return;
-	if (level == 1)
-    	func(tree->n);
-	else if (level > 1)
+	if (tree != NULL && func != NULL)
 	{
-		CurrentLevel(tree->left, level - 1, func);
-		CurrentLevel(tree->right, level - 1, func);
+		if (level == 1)
+			func(tree->n);
+		if (level > 1)
+		{
+			CurrentLevel(tree->left, level - 1, func);
+			CurrentLevel(tree->right, level - 1, func);
+		}
 	}
 }
 
@@ -44,6 +52,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	int h = binary_tree_height(tree);
 	int i;
+
 	for (i = 1; i <= h; i++)
 	{
 		CurrentLevel(tree, i, func);
