@@ -31,7 +31,7 @@ void CurrentLevel(const binary_tree_t *tree, int level, void (*func)(int))
 	{
 		if (level == 1)
 			func(tree->n);
-		if (level > 1)
+		else
 		{
 			CurrentLevel(tree->left, level - 1, func);
 			CurrentLevel(tree->right, level - 1, func);
@@ -50,12 +50,14 @@ void CurrentLevel(const binary_tree_t *tree, int level, void (*func)(int))
 
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
-	int h = binary_tree_height(tree);
+	int height = binary_tree_height(tree) + 1;
 	int i;
 
-	for (i = 1; i <= h; i++)
+	if (tree != NULL && func != NULL)
 	{
-		CurrentLevel(tree, i, func);
-		h++;
+		for (i = 1; i <= height; i++)
+		{
+			CurrentLevel(tree, i, func);
+		}
 	}
 }
